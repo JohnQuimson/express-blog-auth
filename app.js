@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const users = require('./db/users.json');
-const { generateToken } = require('./middlewares/jwt.js');
+const { generateToken, authenticateWithJWT } = require('./middlewares/jwt.js');
 
 // body parser json
 app.use(express.json());
@@ -27,8 +27,9 @@ const errorsFormatter = require('./middlewares/errorsFormatter.js');
 const routesNotFound = require('./middlewares/routesNotFound.js');
 
 app.use(express.static('./public'));
-
 app.use(routersLogger);
+
+app.use(authenticateWithJWT);
 
 // routers
 app.get('/', (req, res) => {
