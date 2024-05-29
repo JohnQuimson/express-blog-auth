@@ -2,7 +2,8 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const users = require('./db/users.json');
-const { generateToken, authenticateWithJWT } = require('./middlewares/jwt.js');
+// const { generateToken, authenticateWithJWT } = require('./middlewares/jwt.js');
+const auth = require('./controllers/auth.js');
 
 // body parser json
 app.use(express.json());
@@ -17,7 +18,7 @@ app.post('/login', (req, res) => {
   if (!user) {
     return res.status(404).send(`Credenziali errate`);
   }
-  const token = generateToken(user);
+  const token = auth.generateToken(user);
   res.send(token);
 });
 
