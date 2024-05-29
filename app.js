@@ -29,7 +29,7 @@ const routesNotFound = require('./middlewares/routesNotFound.js');
 app.use(express.static('./public'));
 app.use(routersLogger);
 
-app.use(authenticateWithJWT);
+// app.use(authenticateWithJWT);
 
 // routers
 app.get('/', (req, res) => {
